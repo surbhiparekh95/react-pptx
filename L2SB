@@ -1,0 +1,88 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { TrendingUp, Users, Brain, MessageSquare } from 'lucide-react';
+
+const ExecutivePresentation = () => {
+  const impactData = [
+    { metric: 'Trust & Transparency', before: 3.82, after: 4.56, improvement: '19%' },
+    { metric: 'Team Communication', before: 3.69, after: 4.40, improvement: '19%' },
+    { metric: 'Inclusive Leadership', before: 3.86, after: 4.55, improvement: '18%' },
+    { metric: 'Emotional Management', before: 3.77, after: 4.32, improvement: '15%' }
+  ];
+
+  const keyHighlights = [
+    {
+      title: "Overall Impact",
+      value: "16%",
+      icon: <TrendingUp className="h-6 w-6 text-blue-600" />,
+      description: "Average improvement across all metrics"
+    },
+    {
+      title: "Trust Building",
+      value: "19%",
+      icon: <Users className="h-6 w-6 text-green-600" />,
+      description: "Increase in transparency and credibility"
+    },
+    {
+      title: "Leadership Skills",
+      value: "18%",
+      icon: <Brain className="h-6 w-6 text-purple-600" />,
+      description: "Growth in inclusive decision making"
+    },
+    {
+      title: "Communication",
+      value: "19%",
+      icon: <MessageSquare className="h-6 w-6 text-orange-600" />,
+      description: "Enhancement in stakeholder engagement"
+    }
+  ];
+
+  return (
+    <div className="space-y-6 p-6 bg-gray-50">
+      {/* Title Section */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Lead to Succeed Track B</h1>
+        <p className="text-lg text-gray-600">Transforming Leadership Capabilities</p>
+      </div>
+
+      {/* Key Metrics Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {keyHighlights.map((highlight, index) => (
+          <Card key={index} className="bg-white">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between mb-2">
+                {highlight.icon}
+                <span className="text-2xl font-bold text-gray-900">{highlight.value}</span>
+              </div>
+              <h3 className="font-semibold text-gray-700">{highlight.title}</h3>
+              <p className="text-sm text-gray-500 mt-1">{highlight.description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Impact Chart */}
+      <Card className="bg-white">
+        <CardHeader>
+          <CardTitle>Leadership Competency Growth</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={impactData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <XAxis dataKey="metric" />
+                <YAxis domain={[0, 5]} />
+                <Tooltip />
+                <Bar name="Before Program" dataKey="before" fill="#94a3b8" />
+                <Bar name="After Program" dataKey="after" fill="#3b82f6" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default ExecutivePresentation;
